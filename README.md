@@ -1,1 +1,1 @@
-# admin_app_django_react-frontend
+# The frontend part of the admin panel project

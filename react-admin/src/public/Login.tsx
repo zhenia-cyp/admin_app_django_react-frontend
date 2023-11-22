@@ -18,7 +18,7 @@ class Login extends Component {
             email: this.email,
             password: this.password
         });
-
+        
         const token = response.data.jwt;
         localStorage.setItem('token', token);
         this.setState({

@@ -5,9 +5,11 @@ import axios from "axios";
 import {Navigate} from "react-router-dom";
 
 
+
 interface WrapperProps {
     children: ReactNode;
 }
+
 class Wrapper extends React.Component<WrapperProps> {
     state = {
         redirect: false
@@ -17,7 +19,7 @@ class Wrapper extends React.Component<WrapperProps> {
         if (token) {
             axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
             try {
-                const response = await axios.get('user/');
+                await axios.get('user/');
             } catch (e) {
                 console.log('Authentication error:',e);
             }

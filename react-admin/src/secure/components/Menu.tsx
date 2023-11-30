@@ -11,7 +11,7 @@ const Menu = () => (
             </li>
 
             <li className="nav-item">
-                <NavLink to={'/users/'} className="nav-link d-flex align-items-center gap-2" aria-current="page" >
+                <NavLink to={'/get/users/'} className="nav-link d-flex align-items-center gap-2" aria-current="page" >
                     Users
                 </NavLink>
             </li>

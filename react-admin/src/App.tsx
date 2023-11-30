@@ -16,7 +16,7 @@ function App() {
                  <Routes>
                       <Route path="/" element={<RedirectToDashbord/>}/>
                       <Route path="/dashboard/" element={<Dashboard/>}/>
-                      <Route path="/users/" element={<Users/>}/>
+                      <Route path="/get/users/" element={<Users/>}/>
                       <Route path="/login/" element={<Login/>}/>
                       <Route path="/register/" element={<Register/>}/>
                  </Routes>

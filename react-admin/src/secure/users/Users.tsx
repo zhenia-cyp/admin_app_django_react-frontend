@@ -7,16 +7,42 @@ class Users extends Component {
     state = {
         users: []
     }
-    componentDidMount = async () => {
-        const response = await axios.get('get/users/');
 
+    page= 1;
+    last_page = 0;
+    componentDidMount = async () => {
+        const response = await axios.get(`get/users/?page=${this.page}`);
+        console.log('response- ',response.data)
         this.setState({
             users: response.data.data
         });
-        console.log('users ::: ', response);
+
+        this.last_page = response.data.meta.last_page;
+        console.log(this.last_page)
     }
 
+    previous = async () => {
+        if(this.page === 1) {
+            return
+        }
+        else {
+            this.page--;
+            await this.componentDidMount();
+        }
+    }
+
+    next = async () => {
+        if(this.page === this.last_page) {
+            return
+        }
+        else {
+            this.page++;
+            await this.componentDidMount();
+        }
+      console.log('page::', this.page);
+    }
     render (){
+
         return (
             <Wrapper>
                 <div
@@ -40,26 +66,38 @@ class Users extends Component {
 
                         {this.state.users.map(
                             (user: User) => {
-                                return (
-                                    <tr>
-                                        <td>{user.id}</td>
-                                        <td>{user.first_name} {user.last_name}</td>
-                                        <td>{user.email}</td>
-                                        <td>{user.role.name}</td>
-                                        <td>
-                                            <div className="btn-group mr-2">
-                                                <a href="#" className="btn btn-sm btn-outline-secondary">Edit</a>
-                                                <a href="#" className="btn btn-sm btn-outline-secondary">Delete</a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                )
+                                console.log('USER: ', user)
+                                    return (
+                                        <tr>
+                                            <td>{user.id}</td>
+                                            <td>{user.first_name} {user.last_name}</td>
+                                            <td>{user.email}</td>
+                                            <td>{user.role ? user.role.name : 'No Role'}</td>
+                                            <td>
+                                                <div className="btn-group mr-2">
+                                                    <a href="#" className="btn btn-sm btn-outline-secondary">Edit</a>
+                                                    <a href="#" className="btn btn-sm btn-outline-secondary">Delete</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    )
+
                             }
                         )}
 
                         </tbody>
                     </table>
                 </div>
+                <ul className="pagination">
+                    <li className="page-item">
+                        <a className="page-link" onClick={this.previous}>previous</a>
+                    </li>
+
+                    <li className="page-item">
+                        <a className="page-link" onClick={this.next}>next</a>
+                    </li>
+
+                </ul>
             </Wrapper>
         )
     }

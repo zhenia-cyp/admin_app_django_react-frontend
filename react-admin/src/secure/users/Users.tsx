@@ -3,6 +3,9 @@ import Wrapper from "../Wrapper";
 import axios from "axios";
 import {User} from "../../classes/user";
 import {Link} from "react-router-dom";
+
+
+
 class Users extends Component {
     state = {
         users: []
@@ -46,11 +49,14 @@ class Users extends Component {
 
         if (window.confirm("Delete the user?")){
             await axios.delete(`get/users/${id}/`)
+    
         }
 
         this.setState({
             users: this.state.users.filter((u: User) => u.id !== id)
+          
         })
+        await this.componentDidMount();
     }
     render (){
 
@@ -77,10 +83,9 @@ class Users extends Component {
 
                         {this.state.users.map(
                             (user: User) => {
-                                console.log('USER: ', user)
                                     return (
                                         <tr>
-                                            <td>{user.id}</td>
+                                            <td>{user.order_num}</td>
                                             <td>{user.first_name} {user.last_name}</td>
                                             <td>{user.email}</td>
                                             <td>{user.role ? user.role.name : 'No Role'}</td>

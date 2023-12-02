@@ -11,11 +11,11 @@ class Users extends Component {
         users: []
     }
 
-    page= 1;
+    page = 1;
     last_page = 0;
     componentDidMount = async () => {
         const response = await axios.get(`get/users/?page=${this.page}`);
-        console.log('response- ',response.data)
+        
         this.setState({
             users: response.data.data
         });
@@ -65,7 +65,7 @@ class Users extends Component {
                 <div
                     className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
                     <div className="btn-toolbar mb-2 mb-md-0">
-                        <Link to={'users/create/'} className="btn btn-sm btn-outline-secondary">Add</Link>
+                        <Link to={'/get/users/create/'} className="btn btn-sm btn-outline-secondary">Add</Link>
                     </div>
                 </div>
                 <div className="table-responsive">

@@ -15,6 +15,13 @@ const Menu = () => (
                     Users
                 </NavLink>
             </li>
+            
+            <li className="nav-item">
+                <NavLink to={'/roles/'} className="nav-link d-flex align-items-center gap-2" aria-current="page" >
+                    Roles
+                </NavLink>
+            </li>
+
         </ul>
     </div>
 )

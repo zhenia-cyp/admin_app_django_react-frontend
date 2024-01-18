@@ -42,7 +42,7 @@ class UserCreate extends Component {
   
     render() {
         if (this.state.redirect) {
-            return <Navigate to={'get/users/'}/>;
+            return <Navigate to={'/get/users/'}/>;
         }
 
         return (

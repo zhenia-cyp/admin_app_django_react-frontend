@@ -12,7 +12,6 @@ class Roles extends Component {
 
   componentDidMount = async () => {
     const response = await axios.get('roles/');
-    console.log('response: ', response);
     this.setState({
       roles: response.data.data
   });
@@ -20,14 +19,14 @@ class Roles extends Component {
   }
 
   deleteRole = async (id:number) =>  {
-
+   
     if (window.confirm("Delete the role?")){
       await axios.delete(`roles/${id}/`)
 
   }
 
   this.setState({
-      users: this.state.roles.filter((r: Role) => r.id !== id)
+      roles: this.state.roles.filter((r: Role) => r.id !== id)
     
   })
 
@@ -56,7 +55,7 @@ class Roles extends Component {
                             (role: Role) => {
                                 return (
                                     <tr key={role.id}>
-                                        <td>{role.id}</td>
+                                        <td>{role.order_num}</td>
                                         <td>{role.name}</td>
                                         <td>
                                         <div className="btn-group mr-2">

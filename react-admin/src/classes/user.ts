@@ -7,7 +7,7 @@ export class User {
     email: string;
     role: Role;
     permissions: string[];
-    order_num: number;
+    order_num: number | null;
 
     constructor(id = 0, first_name = '', last_name = '', email = '', role = new Role(), permissions: string[] = [], order_num = 0) {
         this.id = id;

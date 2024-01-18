@@ -15,11 +15,13 @@ class Wrapper extends React.Component<WrapperProps> {
         redirect: false
     }
     componentDidMount = async () => {
+        console.log('Wrapper')
         const token = localStorage.getItem('token');
         if (token) {
             axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
             try {
                 await axios.get('user/');
+                
             } catch (e) {
                 console.log('Authentication error:',e);
             }

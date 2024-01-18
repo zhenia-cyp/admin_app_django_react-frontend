@@ -11,6 +11,7 @@ import RedirectToDashbord from "./secure/RedirectToDashboard"
 import UserCreate from "./secure/users/UserCreate";
 import UserEdit from './secure/users/UserEdit';
 import Roles from './secure/roles/Roles';
+import RoleCreate from './secure/roles/RoleCreate';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
                       <Route path="/get/users/create/" element={<UserCreate/>}/>
                       <Route path="/get/users/:id/edit/" element={<UserEdit/>}/>
                       <Route path="/roles/" element={<Roles/>}/>
+                      <Route path="/roles/create/" element={<RoleCreate/>}/>
                       
 
                  </Routes>

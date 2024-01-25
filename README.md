@@ -2,20 +2,20 @@
 
 Launching the project
 
-1.  Open the project in a Linux terminal or Windows command prompt
-2.  and clone the repository into the folder you need
+1.   Open the project in a Linux terminal or Windows command prompt
+     and clone the repository into the folder you need
 
-    git clone https://github.com/zhenia-cyp/admin_app_django_react-frontend.git
+     git clone https://github.com/zhenia-cyp/admin_app_django_react-frontend.git
 
-3.   Go to the react-admin folder
+2.   Go to the react-admin folder
 
      cd react-admin
 
-2.1 Install the required dependencies
+2.1  Install the required dependencies
 
      npm install react-scripts
 
-3.  Run the command to launch the project
+3.   Run the command to launch the project
 
      npm start
 

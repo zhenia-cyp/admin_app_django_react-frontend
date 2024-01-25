@@ -1,4 +1,4 @@
-# Admin panel
+# Admin panel (Frontend)
 
 Launching the project
 

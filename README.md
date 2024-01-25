@@ -11,11 +11,11 @@ Launching the project
 
      cd react-admin
 
-2.1  Install the required dependencies
+3.   Install the required dependencies
 
      npm install react-scripts
 
-3.   Run the command to launch the project
+4.   Run the command to launch the project
 
      npm start
 

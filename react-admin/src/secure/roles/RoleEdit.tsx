@@ -25,12 +25,12 @@ class RoleEdit extends Component<any> {
     const token = localStorage.getItem('token');
     
     if (token){
-      const permissionCall = await axios.get('permissions/',{
+      const permissionCall = await axios.get('users/permissions/',{
         headers: {
           Authorization: `Bearer ${token}`  
         }
       });
-      const roleCall = await axios.get(`roles/${this.id}`);
+      const roleCall = await axios.get(`users/roles/${this.id}`);
       const role: Role = roleCall.data.data;
       this.selected = role.permissions.map((p: Permission) => p.id);
       this.setState({
@@ -59,7 +59,7 @@ class RoleEdit extends Component<any> {
   submit = async (e: SyntheticEvent) => {
     e.preventDefault();
     const token = localStorage.getItem('token');
-    await axios.put(`roles/${this.id}/`, {
+    await axios.put(`users/roles/${this.id}/`, {
         name: this.name,
         permissions: this.selected
     }, {

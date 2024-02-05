@@ -27,8 +27,8 @@ class UserEdit extends Component<any> {
 
   componentDidMount = async () => {
     this.id = Number(this.props.params.id);
-    const rolesCall = await axios.get('roles/');
-    const userCall = await axios.get(`get/users/${this.id}/`);
+    const rolesCall = await axios.get('users/roles/');
+    const userCall = await axios.get(`users/get/users/${this.id}/`);
     const user: User = userCall.data.data;
     console.log('user edit: ', user );
     
@@ -52,7 +52,7 @@ class UserEdit extends Component<any> {
       email: this.email,
       role_id: this.role_id}
 
-    await axios.put(`get/users/${this.id}/`, userData);
+    await axios.put(`users/get/users/${this.id}/`, userData);
 
     this.setState({
         redirect: true

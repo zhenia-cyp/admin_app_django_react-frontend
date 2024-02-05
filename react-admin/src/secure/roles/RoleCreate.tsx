@@ -18,7 +18,7 @@ class RoleCreate extends Component {
   componentDidMount = async () => {
     const token = localStorage.getItem('token');
     if (token){
-      const response = await axios.get('permissions/',{
+      const response = await axios.get('users/permissions/',{
         headers: {
           Authorization: `Bearer ${token}`  
         }
@@ -43,7 +43,7 @@ class RoleCreate extends Component {
   submit = async (e: SyntheticEvent) => {
     e.preventDefault();
     const token = localStorage.getItem('token');
-    await axios.post('roles/', {
+    await axios.post('users/roles/', {
         name: this.name,
         permissions: this.selected
     }, {

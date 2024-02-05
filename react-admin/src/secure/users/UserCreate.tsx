@@ -17,7 +17,7 @@ class UserCreate extends Component {
     role_id = 0;
 
     componentDidMount = async () => {
-        const response = await axios.get('roles');
+        const response = await axios.get('users/roles');
 
         this.setState({
             roles: response.data.data
@@ -27,7 +27,7 @@ class UserCreate extends Component {
     submit = async (e: SyntheticEvent) => {
         e.preventDefault();
 
-        await axios.post('get/users/', {
+        await axios.post('users/get/users/', {
             first_name: this.first_name,
             last_name: this.last_name,
             email: this.email,

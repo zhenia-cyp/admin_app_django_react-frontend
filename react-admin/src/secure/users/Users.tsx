@@ -14,7 +14,7 @@ class Users extends Component {
     page = 1;
     last_page = 0;
     componentDidMount = async () => {
-        const response = await axios.get(`get/users/?page=${this.page}`);
+        const response = await axios.get(`users/get/users/?page=${this.page}`);
         
         this.setState({
             users: response.data.data
@@ -48,7 +48,7 @@ class Users extends Component {
     deleteUser = async (id: number) => {
 
         if (window.confirm("Delete the user?")){
-            await axios.delete(`get/users/${id}/`)
+            await axios.delete(`users/get/users/${id}/`)
     
         }
 

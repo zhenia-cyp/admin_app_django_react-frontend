@@ -11,7 +11,7 @@ class Roles extends Component {
 }
 
   componentDidMount = async () => {
-    const response = await axios.get('roles/');
+    const response = await axios.get('users/roles/');
     this.setState({
       roles: response.data.data
   });
@@ -21,7 +21,7 @@ class Roles extends Component {
   deleteRole = async (id:number) =>  {
    
     if (window.confirm("Delete the role?")){
-      await axios.delete(`roles/${id}/`)
+      await axios.delete(`users/roles/${id}/`)
 
   }
 

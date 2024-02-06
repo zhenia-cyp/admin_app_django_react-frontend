@@ -3,6 +3,7 @@ import Wrapper from "../Wrapper";
 import {Link} from "react-router-dom";
 import axios from "axios";
 import {Product} from "../../classes/product";
+import {Paginator} from "../components/Paginator";
 
 
 class Products extends Component {
@@ -10,10 +11,11 @@ class Products extends Component {
   state = {
     products: []
   }
-
+  page = 1;
+  last_page = 0;
 
   componentDidMount = async () => {
-    const response = await axios.get('products/products/');
+    const response = await axios.get(`products/products/?page=${this.page}`);
     console.log('Products response: ', response)
 
     this.setState(
@@ -21,9 +23,12 @@ class Products extends Component {
         products: response.data.data
       }
     )
+      this.last_page = response.data.meta.last_page;
   }
 
-  deleteProduct = async (id: number) => {
+
+
+    deleteProduct = async (id: number) => {
 
     if (window.confirm("Delete the product?")){
       await axios.delete(`products/product/${id}/`)
@@ -37,6 +42,11 @@ class Products extends Component {
 
 }
 
+  handlePageChange = async (page: number) => {
+      this.page = page;
+      await this.componentDidMount();
+
+    }
 
   render(){
     return (
@@ -82,9 +92,11 @@ class Products extends Component {
                         </tbody>
                     </table>
                 </div>
-        </Wrapper>
+                <Paginator lastPage={this.last_page} handlePageChange={this.handlePageChange}/>
+      </Wrapper>
     );
   }
 
 }
+
 export default Products;

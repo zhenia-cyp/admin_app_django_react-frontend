@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import axios from "axios";
 import {Product} from "../../classes/product";
 import {Paginator} from "../components/Paginator";
+import {Deleter} from "../components/Deleter";
 
 
 class Products extends Component {
@@ -26,21 +27,12 @@ class Products extends Component {
       this.last_page = response.data.meta.last_page;
   }
 
+    handleDelete = async (id: number) => {
+        this.setState({
+            products: this.state.products.filter((p: Product) => p.id !== id)
 
-
-    deleteProduct = async (id: number) => {
-
-    if (window.confirm("Delete the product?")){
-      await axios.delete(`products/product/${id}/`)
-
+        })
   }
-
-  this.setState({
-      products: this.state.products.filter((p: Product) => p.id !== id)
-
-  })
-
-}
 
   handlePageChange = async (page: number) => {
       this.page = page;
@@ -82,7 +74,7 @@ class Products extends Component {
                                         <td>
                                         <div className="btn-group mr-2">
                                                     <Link to={`/products/${product.id}/edit/`} className="btn btn-sm btn-outline-secondary">Edit</Link>
-                                                    <a className="btn btn-sm btn-outline-secondary" onClick={() => this.deleteProduct(product.id)}>Delete</a>
+                                                    <Deleter id={product.id} endpoint={'products/product'} handleDelete={this.handleDelete}/>
                                                 </div>
                                         </td>
                                     </tr>

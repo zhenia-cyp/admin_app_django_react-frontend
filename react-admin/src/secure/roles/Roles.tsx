@@ -3,6 +3,7 @@ import Wrapper from "../Wrapper";
 import axios from "axios";
 import {Role} from "../../classes/role";
 import {Link} from "react-router-dom";
+import {Deleter} from "../components/Deleter";
 
 class Roles extends Component {
 
@@ -18,19 +19,13 @@ class Roles extends Component {
     
   }
 
-  deleteRole = async (id:number) =>  {
-   
-    if (window.confirm("Delete the role?")){
-      await axios.delete(`users/roles/${id}/`)
+    handleDelete = async (id:number) =>  {
+        this.setState({
+            roles: this.state.roles.filter((r: Role) => r.id !== id)
 
+        })
   }
 
-  this.setState({
-      roles: this.state.roles.filter((r: Role) => r.id !== id)
-    
-  })
-
-  }
 
   render() {
 
@@ -60,7 +55,7 @@ class Roles extends Component {
                                         <td>
                                         <div className="btn-group mr-2">
                                                     <Link to={`/roles/${role.id}/edit/`} className="btn btn-sm btn-outline-secondary">Edit</Link>
-                                                    <a className="btn btn-sm btn-outline-secondary" onClick={() => this.deleteRole(role.id)}>Delete</a>
+                                                    <Deleter id={role.id} endpoint={'users/roles'} handleDelete={this.handleDelete}/>
                                                 </div>
                                         </td>
                                     </tr>

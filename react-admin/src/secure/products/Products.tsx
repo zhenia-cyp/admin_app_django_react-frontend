@@ -8,7 +8,6 @@ import {Deleter} from "../components/Deleter";
 
 
 class Products extends Component {
-
   state = {
     products: []
   }
@@ -18,7 +17,6 @@ class Products extends Component {
   componentDidMount = async () => {
     const response = await axios.get(`products/products/?page=${this.page}`);
     console.log('Products response: ', response)
-
     this.setState(
       {
         products: response.data.data
@@ -30,19 +28,16 @@ class Products extends Component {
     handleDelete = async (id: number) => {
         this.setState({
             products: this.state.products.filter((p: Product) => p.id !== id)
-
         })
   }
 
   handlePageChange = async (page: number) => {
       this.page = page;
       await this.componentDidMount();
-
     }
 
   render(){
     return (
-      
       <Wrapper>
           <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 ">
                     <div className="btn-toolbar mb-2 mb-md-0">
@@ -66,7 +61,7 @@ class Products extends Component {
                             (product: Product) => {
                                 return (
                                     <tr key={product.id}>
-                                        <td>{product.id}</td>
+                                        <td>{product.order_num}</td>
                                         <td><img src={product.image} width="50"/></td>
                                         <td>{product.title}</td>
                                         <td>{product.description}</td>

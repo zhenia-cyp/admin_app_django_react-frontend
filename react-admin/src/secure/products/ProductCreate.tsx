@@ -2,7 +2,7 @@ import React, {Component,SyntheticEvent} from "react";
 import Wrapper from "../Wrapper";
 import {Navigate} from "react-router-dom";
 import axios from "axios";
-
+import {ImageUpload} from "../components/ImageUpload";
 
 class ProductCreate extends Component {
     state = {
@@ -29,20 +29,12 @@ class ProductCreate extends Component {
         })
     }
 
+    imageChanged = (image: string) => {
+        this.image = image;
 
-    upload = async (files: FileList | null) => {
-        if (files === null) return;
-        const data = new FormData();
-        data.append('image', files[0]);
-        const response = await axios.post('products/upload/', data);
-
-        this.image = response.data.url;
         this.setState({
             image: this.image
         })
-
-
-
     }
 
     render() {
@@ -64,31 +56,26 @@ class ProductCreate extends Component {
                                   onChange={e => this.description = e.target.value}
                         ></textarea>
                     </div>
+
                     <div className="form-group">
                         <label>Image</label>
-                        <input type="text" className="form-control" name="image"
-                               value={this.image = this.state.image}
-                               onChange={e => this.image = e.target.value}
-                        />
-                        <div className="input-group-append">
-                            <label className="btn btn-primary">
-                                Upload <input type="file" hidden onChange={e=>this.upload(e.target.files)}/>
-                            </label>
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        <label>Price</label>
-                        <input type="number" className="form-control" name="email"
-                               onChange={e => this.price = parseFloat(e.target.value)}
-                        />
-                    </div>
 
-                    <button className="btn btn-outline-secondary">Save</button>
+                        <ImageUpload value={this.image = this.state.image} imageChanged={this.imageChanged}/>
+
+                        </div>
+
+                        <div className="form-group">
+                            <label>Price</label>
+                            <input type="number" className="form-control" name="email"
+                                   onChange={e => this.price = parseFloat(e.target.value)}
+                            />
+                        </div>
+                        <button className="btn btn-outline-secondary">Save</button>
                 </form>
 
             </Wrapper>
-        );
+    );
     }
-}
+    }
 
-export default ProductCreate;
+    export default ProductCreate;

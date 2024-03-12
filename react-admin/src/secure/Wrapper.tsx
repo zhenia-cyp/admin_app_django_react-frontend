@@ -15,8 +15,9 @@ class Wrapper extends React.Component<WrapperProps> {
         redirect: false
     }
     componentDidMount = async () => {
-        
+
         const token = localStorage.getItem('token');
+        console.log('token:',token)
         if (token) {
             axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
             try {
@@ -24,6 +25,9 @@ class Wrapper extends React.Component<WrapperProps> {
                 
             } catch (e) {
                 console.log('Authentication error:',e);
+                this.setState({
+                    redirect: true
+                })
             }
         }
         else {

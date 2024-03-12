@@ -16,7 +16,6 @@ class Products extends Component {
 
   componentDidMount = async () => {
     const response = await axios.get(`products/products/?page=${this.page}`);
-    console.log('Products response: ', response)
     this.setState(
       {
         products: response.data.data

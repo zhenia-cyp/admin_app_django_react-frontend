@@ -6,12 +6,14 @@ import {Navigate} from "react-router-dom";
 
 
 
+
 interface WrapperProps {
     children: ReactNode;
 }
 
 class Wrapper extends React.Component<WrapperProps> {
     state = {
+        user: null,
         redirect: false
     }
     componentDidMount = async () => {
@@ -21,12 +23,14 @@ class Wrapper extends React.Component<WrapperProps> {
             axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
             try {
                 await axios.get('users/user/');
-                
+
             } catch (e) {
                 console.log('Authentication error:',e);
                 this.setState({
                     redirect: true
+
                 })
+
             }
         }
         else {
@@ -38,11 +42,11 @@ class Wrapper extends React.Component<WrapperProps> {
 
     render() {
         if(this.state.redirect) {
-            return <Navigate to="/login"/>
+            return <Navigate to="/login" />
         }
         return (
             <>
-                <Nav/>
+                <Nav />
                 <div className="container-fluid">
                     <div className="row">
                         <Menu/>

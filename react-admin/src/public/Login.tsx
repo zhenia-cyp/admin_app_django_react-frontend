@@ -11,7 +11,6 @@ class Login extends Component {
     state = {
         redirect: false
     }
-
     submit =  async (e: SyntheticEvent) => {
         e.preventDefault();
         const response = await axios.post('users/login/',  {

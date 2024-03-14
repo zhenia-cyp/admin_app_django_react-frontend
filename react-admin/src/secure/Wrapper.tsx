@@ -1,8 +1,11 @@
-import React, {ReactNode} from "react";
+import React, {ReactNode,Dispatch} from "react";
 import Nav from "./components/Nav";
 import Menu from "./components/Menu";
 import axios from "axios";
 import {Navigate} from "react-router-dom";
+import {connect} from "react-redux";
+import {User} from "../classes/user";
+import setUser from "../redux/actions/setUserAction";
 
 
 
@@ -11,7 +14,7 @@ interface WrapperProps {
     children: ReactNode;
 }
 
-class Wrapper extends React.Component<WrapperProps> {
+class Wrapper extends React.Component<any>{
     state = {
         user: null,
         redirect: false
@@ -22,8 +25,9 @@ class Wrapper extends React.Component<WrapperProps> {
         if (token) {
             axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
             try {
-                await axios.get('users/user/');
-
+                const response = await axios.get('users/user/');
+                console.log('Wrapper response: ', response)
+                this.props.setUser(response.data.data)
             } catch (e) {
                 console.log('Authentication error:',e);
                 this.setState({
@@ -42,7 +46,7 @@ class Wrapper extends React.Component<WrapperProps> {
 
     render() {
         if(this.state.redirect) {
-            return <Navigate to="/login" />
+            return <Navigate to="/login/" />
         }
         return (
             <>
@@ -59,4 +63,16 @@ class Wrapper extends React.Component<WrapperProps> {
         )
     }
 }
-export default Wrapper;
+
+const mapStateToProps = (state: { user: User }) => {
+    return {
+        user: state.user
+    };
+}
+
+const mapDispatchToProps = (dispatch: Dispatch<any>) => {
+    return {
+        setUser: (user: User) => dispatch(setUser(user))
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Wrapper);

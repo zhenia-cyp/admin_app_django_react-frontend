@@ -2,38 +2,45 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import {Navigate, Link} from "react-router-dom";
 import {User} from "../../classes/user";
+import {connect} from "react-redux";
 
 
 
-
-class Nav extends Component{
+class Nav extends Component<{user: User}>{
 
     state = {
-        user: new User(),
         redirect: false
     }
 
-    componentDidMount = async () => {
-
-        const token = localStorage.getItem('token');
-        if (token) {
-            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-            try {
-                const response = await axios.get('users/user/');
-                this.setState({
-                    user: response.data.data
-                })
-
-            } catch (e) {
-                console.log('Authentication error:', e);
-
-            }
-        }
-    }
+    // componentDidMount = async () => {
+    //
+    //     const token = localStorage.getItem('token');
+    //     if (token) {
+    //         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    //         try {
+    //             const response = await axios.get('users/user/');
+    //             this.setState({
+    //                 user: response.data.data
+    //             })
+    //
+    //         } catch (e) {
+    //             console.log('Authentication error:', e);
+    //             this.setState({
+    //                 redirect: true
+    //             })
+    //         }
+    //     }
+    //     else {
+    //         this.setState({
+    //             redirect: true
+    //         })
+    //     }
+    // }
     handeleClick = async () => {
         localStorage.clear();
         try {
-            await axios.post('logout/', {'removetoken': true});
+            await axios.post('users/logout/', {'removetoken': true});
+            this.setState({redirect: true});
 
         } catch (error) {
             this.setState({redirect: true});
@@ -58,8 +65,8 @@ class Nav extends Component{
                 <ul className="navbar-nav px-2">
                     <li className="nav-item text-nowrap">
                         <Link to={'/profile'}
-                              className="p-2 text-white">{this.state.user.first_name} {this.state.user.last_name}</Link>
-                        <a className="nav-link p-2 text-white" href="#" onClick={this.handeleClick}>Sign out</a>
+                              className="p-2 text-white">{this.props.user.first_name} {this.props.user.last_name}</Link>
+                        <Link to={''} className="p-2 text-white navbar-nav" onClick={this.handeleClick}>Sign out</Link>
                     </li>
                 </ul>
             </nav>
@@ -69,4 +76,6 @@ class Nav extends Component{
 }
 
 // @ts-ignore
-export default Nav;
+// export default Nav;
+// @ts-ignore
+export default connect(state => ({user: state.user}))(Nav);

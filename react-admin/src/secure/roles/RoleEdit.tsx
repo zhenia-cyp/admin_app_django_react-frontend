@@ -21,7 +21,6 @@ class RoleEdit extends Component<any> {
   
   componentDidMount = async () => {
     this.id = Number(this.props.params.id);
-    console.log('RoleEdit: ', this.id);
     const token = localStorage.getItem('token');
     
     if (token){

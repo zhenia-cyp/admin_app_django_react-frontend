@@ -28,11 +28,6 @@ class Profile extends Component<any>{
         })
 
         const user: User = response.data;
-        // this.setState({
-        //     first_name: user.first_name,
-        //     last_name: user.last_name,
-        //     email: user.email,
-        // })
         this.props.setUser(user);
 
     }

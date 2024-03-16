@@ -45,10 +45,7 @@ class Dashboard extends Component {
                 ]
             })
         } catch (e){
-            console.log('error:', e);
-            this.setState({
-                redirect: true
-            })
+
 
         }
     }

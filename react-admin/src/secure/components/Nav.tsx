@@ -11,31 +11,6 @@ class Nav extends Component<{user: User}>{
     state = {
         redirect: false
     }
-
-    // componentDidMount = async () => {
-    //
-    //     const token = localStorage.getItem('token');
-    //     if (token) {
-    //         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    //         try {
-    //             const response = await axios.get('users/user/');
-    //             this.setState({
-    //                 user: response.data.data
-    //             })
-    //
-    //         } catch (e) {
-    //             console.log('Authentication error:', e);
-    //             this.setState({
-    //                 redirect: true
-    //             })
-    //         }
-    //     }
-    //     else {
-    //         this.setState({
-    //             redirect: true
-    //         })
-    //     }
-    // }
     handeleClick = async () => {
         localStorage.clear();
         try {
@@ -75,7 +50,5 @@ class Nav extends Component<{user: User}>{
 
 }
 
-// @ts-ignore
-// export default Nav;
 // @ts-ignore
 export default connect(state => ({user: state.user}))(Nav);
